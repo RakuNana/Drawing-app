@@ -17,6 +17,27 @@ root.config(menu=menu_bar)
 def save_image():
     pass
 
+def erase_all():
+    my_canvas.delete("all")
+
+def increase_pen_size():
+    pass
+
+def decrease_pen_size():
+    pass
+
+def color_picker():
+    pass
+
+def add_layers():
+    pass
+
+def remove_layers():
+    pass
+
+def toolbox():
+    pass
+
 #-------------------------------------------------------------------------------
 
 file_menu = Menu(menu_bar,tearoff=0)
@@ -31,6 +52,7 @@ menu_bar.add_cascade(label="Edit", menu=edit_menu)
 
 edit_menu.add_command(label="Undo", command=None)
 edit_menu.add_command(label="Redo", command=None)
+edit_menu.add_command(label="Delete all", command=erase_all)
 
 view_menu = Menu(menu_bar,tearoff=0)
 menu_bar.add_cascade(label="View", menu=view_menu)
