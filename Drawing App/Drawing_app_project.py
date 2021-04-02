@@ -6,6 +6,7 @@ import PIL
 from PIL import Image
 import cv2
 
+
 root = tk.Tk()
 root.title("Drawing app")
 root.geometry("600x600")
@@ -13,15 +14,31 @@ root.geometry("600x600")
 menu_bar = tk.Menu(root)
 root.config(menu=menu_bar)
 
+btn_held = False
+global penwidth
+penwidth = 1
+
+color_fg = "black"
+#-------------------------------------------------------------------------------
+
+
+def toolbox():
+    pass
+
+def pressed(event):
+    global penwidth
+    print("pressed")
+    penwidth += 1
+
+def release(event):
+    global penwidth
+    print("released")
 
 def save_image():
     pass
 
 def erase_all():
     my_canvas.delete("all")
-
-def increase_pen_size():
-    pass
 
 def decrease_pen_size():
     pass
@@ -33,9 +50,6 @@ def add_layers():
     pass
 
 def remove_layers():
-    pass
-
-def toolbox():
     pass
 
 #-------------------------------------------------------------------------------
@@ -73,13 +87,17 @@ def draw_line(event):
     if my_canvas.old_cords:
         x1 = my_canvas.old_cords
         y1 = my_canvas.old_cords
-        my_canvas.create_line(x,y,x1,y1)
+        my_canvas.create_line(x,y,x1,y1,width=penwidth,fill = color_fg, capstyle =['round'] ,smooth = True)
     my_canvas.old_cords = x,y
 
 def release_cord(event):
     my_canvas.old_cords = None
 
-
+#-------------------------------------------------------------------------------
 root.bind('<Button1-Motion>', draw_line)
 root.bind('<ButtonRelease-1>', release_cord)
+root.bind('<Key-rightbracket>' , pressed)
+root.bind('<KeyRelease-rightbracket>' , release)
+
+
 root.mainloop()
